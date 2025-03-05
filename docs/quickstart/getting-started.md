@@ -130,4 +130,4 @@ System.out.println("Transaction status: " + (txInfo.getResult() == SUCCESS));
 - Learn more about [Key Management](../guides/keypair/key-management.md)
 - Explore [Transaction Guide](../guides/transactions/transaction-guide.md)
 - Check out [Smart Contract Integration](../guides/smart-contracts/overview.md)
-- View the complete [API Reference](../../../javadoc/org/tron/trident/core/ApiWrapper.html)
+- View the complete [API Reference](/trident-docs/javadoc/org/tron/trident/core/ApiWrapper.html)
