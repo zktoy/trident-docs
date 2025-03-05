@@ -54,7 +54,7 @@ nav:
     - Contract Deployment: guides/smart-contracts/deployment.md
     - Contract Interaction: guides/smart-contracts/interaction.md
   - API Reference:
-    - javadoc: !join [!ENV [repo_url, 'https://tronprotocol.github.io/trident-docs'], '/org/tron/trident/core/ApiWrapper.html']
+    - javadoc: '/javadoc/org/tron/trident/core/ApiWrapper.html'
 
 extra:
   version:
