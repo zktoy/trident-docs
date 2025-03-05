@@ -87,5 +87,5 @@ extra_css:
   - stylesheets/extra.css
 
 site_url: https://0xbigapple.github.io/trident-docs/
-repo_url: https://github.com/tronprotocol/trident 
-repo_name: trident
+repo_url: https://github.com/0xbigapple/trident-docs
+repo_name: trident-docs
