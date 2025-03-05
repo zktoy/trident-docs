@@ -6,12 +6,20 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for proper versioning
+      
       - uses: actions/setup-python@v4
         with:
           python-version: '3.x'
@@ -21,11 +29,18 @@ jobs:
           pip install mkdocs-material
           pip install mike
       
-      - name: Configure Git user
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
       
-      - name: Deploy documentation
+      - name: Build
         run: |
-          mkdocs gh-deploy --force 
+          mkdocs build --clean
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'site'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 
