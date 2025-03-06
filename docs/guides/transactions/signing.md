@@ -40,10 +40,10 @@ Trident provides methods to validate signature correctness using transaction ID 
 
 ```java
 // Verify using raw data
-boolean isValid = KeyPair.verify(byte[] txid, byte[] signature, byte[] ownerAddress);
+boolean isValid = SignatureValidator.verify(byte[] txid, byte[] signature, byte[] ownerAddress);
 
 // Verify using String format
-boolean isValid = KeyPair.verify(String txid, String signature, String ownerAddress);
+boolean isValid = SignatureValidator.verify(String txid, String signature, String ownerAddress);
 ```
 
 !!! note

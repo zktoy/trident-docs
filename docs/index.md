@@ -20,18 +20,16 @@ Trident includes three main modules:
 - Transaction building and signing
 - TRC10/TRC20/TRC721 token support
 
-## Install 
+## Install
 
 Trident is compiled with Java 1.8.
 
-### Latest Version (0.9.2)
-
-Available via Maven repository:
+### Version 0.9.2 and Later
 
 #### Gradle
 
 ```groovy
-implementation("io.github.tronprotocol:trident:0.9.2")
+implementation("io.github.tronprotocol:trident:0.9.2")  // Check Maven Central for newer versions
 ```
 
 #### Maven
@@ -40,7 +38,7 @@ implementation("io.github.tronprotocol:trident:0.9.2")
 <dependency>
     <groupId>io.github.tronprotocol</groupId>
     <artifactId>trident</artifactId>
-    <version>0.9.2</version>
+    <version>0.9.2</version>  <!-- Check Maven Central for newer versions -->
 </dependency>
 ```
 
@@ -77,7 +75,7 @@ dependencies {
 ```
 
 !!! warning "Version Notice"
-    We strongly recommend using version 0.9.2 which is available via Maven repository and combines all modules into a single package.
+    We strongly recommend using version 0.9.2 or later, as newer versions are more stable and feature-rich, with all modules combined into a single package.
 
 ## Integrity Check
 

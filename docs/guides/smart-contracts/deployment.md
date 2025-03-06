@@ -23,21 +23,18 @@ You can also use online tools on [TRON IDE](https://www.tronide.io/)
 Once you have the bytecode and ABI, deploy the contract using Trident:
 
 ```java
-// Initialize client
-ApiWrapper client = ApiWrapper.ofNile("your_private_key");
-
 // Deploy contract
 TransactionExtention txn = client.deployContract(
-    "MyContract",                // Contract name
-    abiStr,                     // Contract ABI string
-    bytecode,                   // Contract bytecode
-    null,                       // Constructor parameters (if any)
-    100_000_000L,              // Fee limit (100 TRX)
-    100L,                       // Consume user resource percent (0-100)
-    10_000_000L,               // Origin energy limit
-    0L,                        // Call value (amount of TRX to send)
-    "",                        // Token ID (for TRC10 token, empty if not used)
-    0L                         // Token value (for TRC10 token)
+        "MyContract",                // Contract name
+        abiStr,                      // Contract ABI string
+        bytecode,                    // Contract bytecode
+        null,                        // Constructor parameters (if any)
+        100_000_000L,               // Fee limit (100 TRX)
+        100L,                        // Consume user resource percent (0-100)
+        10_000_000L,                // Origin energy limit
+        0L,                         // Call value (amount of TRX to send)
+        "",                         // Token ID (for TRC10 token, empty if not used)
+        0L                          // Token value (for TRC10 token)
 );
 
 // Sign and broadcast
@@ -82,6 +79,5 @@ TransactionExtention txn = client.deployContract(
 ```
 
 !!! note
-    - The `consumeUserResourcePercent` parameter determines the proportion of resources that will be consumed by users who interact with the contract
     - Make sure not to send TRX (call value) to a non-payable constructor
-    - For TRC10 token operations, provide the token ID and value 
+    - For TRC10 token operations, provide the token ID and value

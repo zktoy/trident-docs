@@ -10,29 +10,27 @@ The `abi` package in Trident includes libraries to encode/decode ABIs. Here's an
 // 1. Define function parameters (empty for totalSupply)
 List<Type> inputParameters = Collections.emptyList();
 
-// 2. Encode the parameters
-String methodSignature = "totalSupply()";
-String encodedHex = FunctionEncoder.encode(
-    methodSignature,
-    inputParameters
+// 2. Create function and encode
+Function function = new Function(
+    "totalSupply",     // Function name
+    inputParameters,   // Function input parameters
+    Arrays.asList(new TypeReference<Uint256>() {})  // Function output parameters
 );
+String encodedHex = FunctionEncoder.encode(function);
 
 // 3. Call the contract
 TransactionExtention txnExt = client.triggerConstantContract(
-    contractAddress,    // Contract address
-    methodSignature,    // Method signature
-    encodedHex,        // Encoded parameters
-    0,                 // Call value (amount of TRX to send)
-    ownerAddress       // Caller address
+    ownerAddress,      // Caller address
+    contractAddress,   // Contract address
+    encodedHex        // Encoded function call
 );
 
 // 4. Decode the result
 String result = Numeric.toHexString(txnExt.getConstantResult(0).toByteArray());
-List<Type> decodedResult = FunctionReturnDecoder.decode(
-    result,
-    Arrays.asList(new TypeReference<Uint256>() {})  // Expected return type
-);
-BigInteger totalSupply = (BigInteger) decodedResult.get(0).getValue();
+BigInteger totalSupply = (BigInteger) FunctionReturnDecoder.decode(
+    result, 
+    function.getOutputParameters()
+).get(0).getValue();
 
 // For tokens with 18 decimals (like JST), the result might be:
 // 9900000000000000000000000000
@@ -77,4 +75,4 @@ List<Type> params = Arrays.asList(
 );
 ```
 
-Using incorrect types will result in transaction failure or unexpected behavior. 
+Using incorrect types will result in transaction failure or unexpected behavior.

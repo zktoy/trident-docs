@@ -36,14 +36,11 @@ public class QuickStart {
 
 ## Basic Operations
 
-### Check Account Balance
+### Get Account Balance
 
 ```java
-import org.tron.trident.proto.Response.Account;
 
-// Get account information
-Account account = client.getAccount("your_address");
-long balance = account.getBalance(); // balance in SUN (1 TRX = 1,000,000 SUN)
+long balance = client.getAccountBalance("your_address"); // balance in SUN (1 TRX = 1,000,000 SUN)
 System.out.println("Balance: " + balance / 1_000_000.0 + " TRX");
 ```
 
@@ -89,17 +86,18 @@ Function transfer = new Function(
 String encodedHex = FunctionEncoder.encode(transfer);
 
 // Trigger contract
-TransactionExtention txn = client.triggerContract(
-    contractAddress,
-    "transfer(address,uint256)",
-    encodedHex,
-    150_000_000L, // Fee limit in SUN
-    0L, // Call value in SUN
-    "owner_address"
+TransactionExtention transactionExtention = client.triggerContract(
+        fromAddr,        // Sender Address
+        contractAddress, // Contract Address
+        encodedHex,      // Encoded function call
+        0,              // call value
+        0,              // token value
+        null,           // token id
+        150_000_000L    // fee Limit
 );
 
 // Sign and broadcast
-Transaction signedTxn = client.signTransaction(txn);
+Transaction signedTxn = client.signTransaction(transactionExtention);
 String txid = client.broadcastTransaction(signedTxn);
 System.out.println("Token transfer sent: " + txid);
 ```
@@ -122,7 +120,7 @@ import org.tron.trident.proto.Response.TransactionInfo;
 
 // Get transaction info by ID
 TransactionInfo txInfo = client.getTransactionInfoById(txid);
-System.out.println("Transaction status: " + (txInfo.getResult() == SUCCESS));
+System.out.println("Transaction status: " + txInfo.getResult());
 ```
 
 ## Learn More

@@ -21,13 +21,13 @@ Creating a transaction locally, for example:
 TransactionExtention transactionExtention = client.transfer("from_address", "to_address", amount);
 ```
 
-### 2. Add Extra Parameters
+### 2. Add Extra Parameters (Optional)
 
 `TransactionBuilder` allows you to add or modify parameters before signing:
 
 ```java
 TransactionBuilder builder = new TransactionBuilder(transaction); //transaction is transactionExtention.getTransaction();
-builder.setFeeLimit(100000000L);  // Only required for smart contract transactions
+builder.setFeeLimit(100000000L);  // Only required for smart contract transactions, can also be set in triggerContract()
 builder.setMemo("memo");
 Transaction transaction = builder.build();
 ```
@@ -71,10 +71,6 @@ TransactionInfo txInfo = client.getTransactionInfoById(txid);
 System.out.println("Transaction status: " + (txInfo.getResult() == SUCCESS));
 ```
 
-## Transaction Types
-
-Trident supports most types of transactions on TRON network. For details about transaction types, please refer to [Transaction Types](transaction-types.md).
-
 ## Advanced Transaction Creation
 
 By default, Trident builds transactions locally but needs to query the fullnode for block information:
@@ -107,3 +103,19 @@ client.disableLocalCreate();
     - Block ID must be from a recent block within the node's solid block range
     - Always call `disableLocalCreate()` after you're done to release resources
     - **For most users, the default transaction creation method is recommended**
+
+## Transaction Types
+
+Trident supports most types of transactions on TRON network. For details about transaction types, please refer to:
+
+- [Full Node API Overview](https://developers.tron.network/reference/full-node-api-overview)
+- [Trident API Reference](../../javadoc/org/tron/trident/core/ApiWrapper.html)
+
+The transaction types include:
+
+- Basic Transactions (TRX transfer, TRC10 token transfer)
+- Account Operations (create, update, permissions)
+- Smart Contract Operations (deploy, trigger, update)
+- Resource Management (freeze, unfreeze, delegate)
+- Network Governance (vote, proposal)
+- And more...

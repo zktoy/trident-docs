@@ -46,7 +46,6 @@ nav:
     - Key Management: guides/keypair/key-management.md
   - Transactions:
     - Transaction Guide: guides/transactions/transaction-guide.md
-    - Transaction Types: guides/transactions/transaction-types.md
     - Transaction Signing: guides/transactions/signing.md
   - Smart Contracts:
     - Overview: guides/smart-contracts/overview.md
