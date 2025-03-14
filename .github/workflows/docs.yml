@@ -36,7 +36,11 @@ jobs:
         run: |
           mkdocs build --clean --site-dir site
           
-          mike deploy --push --update-aliases ${{ github.event.inputs.version }} latest
+          mike delete latest || true
+          
+          mike deploy --push ${{ github.event.inputs.version }}
+          mike alias --push ${{ github.event.inputs.version }} latest
+          
           mike set-default --push latest
           
           mike list 
