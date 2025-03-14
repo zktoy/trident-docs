@@ -31,6 +31,11 @@ jobs:
       
       - name: Deploy docs
         run: |
-          mike deploy --push --update-aliases ${{ github.event.inputs.version }}
-          mike set-default --push ${{ github.event.inputs.version }}
+          mike delete --push ${{ github.event.inputs.version }} || true
+          
+          mike deploy --push --update-aliases ${{ github.event.inputs.version }} latest
+          mike set-default --push latest
+          
           mkdocs build --clean --site-dir site 
+          
+          mike list
