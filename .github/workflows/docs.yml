@@ -53,6 +53,8 @@ jobs:
           mike alias --push ${{ github.event.inputs.version }} latest
           
           mike set-default --push latest
+
+          mike build
           
           mike list 
 
