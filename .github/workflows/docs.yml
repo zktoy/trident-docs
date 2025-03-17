@@ -47,6 +47,8 @@ jobs:
         run: |
           mkdocs build --clean --site-dir site
           
+          mike delete latest || true
+          
           mike deploy --push ${{ github.event.inputs.version }}
           mike alias --push ${{ github.event.inputs.version }} latest
           
