@@ -49,8 +49,7 @@ jobs:
           
           mike delete latest || true
           
-          mike deploy --push ${{ github.event.inputs.version }}
-          mike alias --push ${{ github.event.inputs.version }} latest
+          mike deploy --push --update-aliases ${{ github.event.inputs.version }} latest --prefix /trident-docs/
           
           mike set-default --push latest
           
