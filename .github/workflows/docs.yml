@@ -48,8 +48,10 @@ jobs:
           mkdocs build --clean --site-dir site
           
           mike delete latest || true
+
+          mike deploy --push ${{ github.event.inputs.version }}
           
-          mike deploy --push --update-aliases ${{ github.event.inputs.version }} latest --prefix /trident-docs/
+          mike alias --push ${{ github.event.inputs.version }} latest
           
           mike set-default --push latest
           
