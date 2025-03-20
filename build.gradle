@@ -91,7 +91,7 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok:1.18.12'
         testCompileOnly 'org.projectlombok:lombok:1.18.12'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
-        implementation "org.webjars.npm:jquery:3.0.0"
+        implementation "org.springframework:spring-webmvc:4.3.0.RELEASE"
     }
 
     test {
