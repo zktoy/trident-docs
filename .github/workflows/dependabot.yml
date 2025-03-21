@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    on:
+      pull_request:
+        branches:
+          - main
+      push:
+        branches:
+          - main
