@@ -7,4 +7,3 @@ updates:
       interval: "daily"
     open-pull-requests-limit: 0
     security-updates-only: true
-    vulnerability-alerts: true
