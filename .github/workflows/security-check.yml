@@ -26,11 +26,16 @@ jobs:
           args: >
             --enableExperimental
             --scan '.'
-            --out './reports'
+            --out '.'
+          
+      - name: List files
+        run: |
+          ls -la
+          find . -name "dependency-check-report.html"
           
       - name: Upload Test results
         uses: actions/upload-artifact@v3
         if: always()
         with:
           name: Dependency Check Report
-          path: reports/dependency-check-report.html 
+          path: dependency-check-report.html 
