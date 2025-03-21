@@ -5,3 +5,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 0
+    security-updates-only: true
+    vulnerability-alerts: true
