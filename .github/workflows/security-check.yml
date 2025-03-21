@@ -18,13 +18,19 @@ jobs:
       
       - name: Run Dependency Check
         uses: dependency-check/Dependency-Check_Action@main
+        id: dependency-check
         with:
           project: 'Trident'
           path: '.'
           format: 'HTML'
+          args: >
+            --enableExperimental
+            --scan '.'
+            --out './reports'
           
       - name: Upload Test results
         uses: actions/upload-artifact@v3
+        if: always()
         with:
           name: Dependency Check Report
-          path: reports 
+          path: reports/dependency-check-report.html 
