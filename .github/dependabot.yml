@@ -4,7 +4,7 @@ updates:
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     open-pull-requests-limit: 0
     security-updates-only: true
     vulnerability-alerts: true
