@@ -29,6 +29,6 @@ jobs:
       - name: Generate and submit dependency graph    # Generate and submit dependency graph
         uses: gradle/actions/dependency-submission@v2  # Downgrade to v2
         with:
-          gradle-version: 7.6             # Specify Gradle version
-          build-root-directory: .         # Specify root directory
-          arguments: dependencies         # Run dependencies task 
+          dependency-graph: true          # Enable dependency graph submission
+          build-scan-publish: true
+          arguments: dependencies
