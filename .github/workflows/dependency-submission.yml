@@ -30,5 +30,4 @@ jobs:
         uses: gradle/gradle-build-action@v2          # Use correct action path
         with:
           dependency-graph: generate-and-submit
-          build-scan-publish: true
-          arguments: dependencies
+          arguments: allprojects dependencies
