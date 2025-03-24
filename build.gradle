@@ -91,7 +91,7 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok:1.18.12'
         testCompileOnly 'org.projectlombok:lombok:1.18.12'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
-        implementation "org.springframework:spring-webmvc:5.3.10"
+        implementation "org.springframework.security:spring-security-crypto:6.3.0"
     }
 
     test {
