@@ -11,8 +11,8 @@ on:
 
 permissions:
   contents: write                         # Grant permission to write dependency graph
-  security-events: write
-  dependabot: write
+  security-events: write                  # Permission for security events
+
 jobs:
   dependency-submission:
     runs-on: ubuntu-latest
