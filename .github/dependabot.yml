@@ -1,10 +1,24 @@
 version: 2
-
 updates:
+  
   - package-ecosystem: "gradle"
     directory: "/"
+    target-branch: "main"
     schedule:
-      interval: "daily"
+      interval: "daily"    # Default runs at UTC 05:00 (13:00 CST)
+    open-pull-requests-limit: 0    # Disable automatic PR creation
+    ignore:
+      - dependency-name: "*"       # Ignore all version updates
+    allow:
+      - dependency-type: "direct"  # Check direct dependencies
+      - dependency-type: "indirect" # Check indirect dependencies
+
+  # release branch check
+  - package-ecosystem: "gradle"
+    directory: "/"
+    target-branch: "release_**"    # Match all release branches
+    schedule:
+      interval: "daily"    # Use same default schedule
     open-pull-requests-limit: 0
     ignore:
       - dependency-name: "*"
