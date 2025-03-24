@@ -11,7 +11,8 @@ on:
 
 permissions:
   contents: write                         # Grant permission to write dependency graph
-
+  security-events: write
+  dependabot: write
 jobs:
   dependency-submission:
     runs-on: ubuntu-latest
@@ -29,4 +30,4 @@ jobs:
         uses: gradle/gradle-build-action@v2          # Use correct action path
         with:
           dependency-graph: generate-and-submit
-          arguments: :utils:dependencies :abi:dependencies :core:dependencies --configuration runtimeClasspath
+          arguments: :utils:dependencies :abi:dependencies :core:dependencies --configuration runtimeClasspath --scan
