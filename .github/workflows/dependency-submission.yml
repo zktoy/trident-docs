@@ -27,7 +27,7 @@ jobs:
           distribution: 'adopt'           # Change to AdoptOpenJDK
           
       - name: Generate and submit dependency graph    # Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@v2  # Downgrade to v2
+        uses: gradle/gradle-build-action@v2          # Use correct action path
         with:
           dependency-graph: true          # Enable dependency graph submission
           build-scan-publish: true
