@@ -26,8 +26,17 @@ jobs:
           java-version: '8'              # Use Java 8
           distribution: 'adopt'           # Change to AdoptOpenJDK
           
-      - name: Generate and submit dependency graph    # Generate and submit dependency graph
-        uses: gradle/gradle-build-action@v2          # Use correct action path
+      - name: Clean Gradle Cache
+        run: |
+          rm -rf ~/.gradle/caches/
+          ./gradlew clean
+          
+      - name: Generate dependency graph
+        uses: gradle/gradle-build-action@v2
         with:
-          dependency-graph: generate-and-submit
-          arguments: :utils:dependencies :abi:dependencies :core:dependencies --configuration runtimeClasspath --scan
+          arguments: :utils:dependencies :abi:dependencies :core:dependencies --configuration runtimeClasspath --refresh-dependencies
+          
+      - name: Submit dependency graph
+        uses: advanced-security/maven-dependency-submission-action@v3
+        with:
+          directory: .
