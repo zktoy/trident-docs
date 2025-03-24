@@ -31,12 +31,12 @@ jobs:
           rm -rf ~/.gradle/caches/
           ./gradlew clean
           
-      - name: Generate dependency graph
+      - name: Generate and submit dependency graph
         uses: gradle/gradle-build-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          dependency-graph: generate-and-submit
           arguments: :utils:dependencies :abi:dependencies :core:dependencies --configuration runtimeClasspath --refresh-dependencies
-          
-      - name: Submit dependency graph
-        uses: advanced-security/maven-dependency-submission-action@v3
-        with:
-          directory: .
+          build-root-directory: .
+          gradle-home-cache-cleanup: true
