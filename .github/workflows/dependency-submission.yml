@@ -30,4 +30,4 @@ jobs:
         uses: gradle/gradle-build-action@v2          # Use correct action path
         with:
           dependency-graph: generate-and-submit
-          arguments: allprojects dependencies
+          arguments: projects dependencies
