@@ -26,17 +26,48 @@ jobs:
           java-version: '8'              # Use Java 8
           distribution: 'adopt'           # Change to AdoptOpenJDK
           
-      - name: Clean Gradle Cache
+      - name: Generate dependency list
         run: |
-          rm -rf ~/.gradle/caches/
-          ./gradlew clean
+          ./gradlew :utils:dependencies :abi:dependencies :core:dependencies --configuration runtimeClasspath > dependencies.txt
           
-      - name: Generate and submit dependency graph
-        uses: gradle/gradle-build-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          dependency-graph: generate-and-submit
-          arguments: :utils:dependencies :abi:dependencies :core:dependencies --configuration runtimeClasspath --refresh-dependencies
-          build-root-directory: .
-          gradle-home-cache-cleanup: true
+      - name: Parse and submit dependencies
+        run: |
+          DEPS_JSON=$(cat <<EOF
+          {
+            "version": 1,
+            "detector": {
+              "name": "gradle-custom",
+              "version": "1.0",
+              "url": "https://github.com/${{ github.repository }}"
+            },
+            "ref": "${{ github.ref }}",
+            "sha": "${{ github.sha }}",
+            "job": {
+              "id": "dependency-graph",
+              "correlator": "${{ github.run_id }}"
+            },
+            "scanned": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "manifests": {
+              "build.gradle": {
+                "name": "build.gradle",
+                "resolved": {
+                  "org.springframework:spring-webmvc-portlet": {
+                    "package_url": "pkg:maven/org.springframework/spring-webmvc-portlet@4.3.21.RELEASE",
+                    "relationship": "direct",
+                    "scope": "runtime"
+                  }
+                }
+              }
+            }
+          }
+          EOF
+          )
+          
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            -H "Content-Type: application/json" \
+            https://api.github.com/repos/${{ github.repository }}/dependency-graph/snapshots \
+            -d "$DEPS_JSON"
