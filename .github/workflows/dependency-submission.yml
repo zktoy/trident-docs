@@ -29,6 +29,6 @@ jobs:
       - name: Generate and submit dependency graph    # Generate and submit dependency graph
         uses: gradle/gradle-build-action@v2          # Use correct action path
         with:
-          dependency-graph: true          # Enable dependency graph submission
+          dependency-graph: generate-and-submit
           build-scan-publish: true
           arguments: dependencies
