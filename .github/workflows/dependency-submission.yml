@@ -23,12 +23,12 @@ jobs:
       - name: Setup Java                 # Setup Java environment
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: '8'              # Use Java 8
+          distribution: 'adopt'           # Change to AdoptOpenJDK
           
       - name: Generate and submit dependency graph    # Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@v3
+        uses: gradle/actions/dependency-submission@v2  # Downgrade to v2
         with:
-          build-scan-publish: true                    # Enable build scan
-          gradle-build-scan-publish: true             # Enable Gradle build scan
-          sub-module-mode: true                       # Enable submodule support 
+          gradle-version: 7.6             # Specify Gradle version
+          build-root-directory: .         # Specify root directory
+          arguments: dependencies         # Run dependencies task 
