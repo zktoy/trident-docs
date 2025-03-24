@@ -1,0 +1,34 @@
+name: Dependency Submission
+
+on:
+  push:
+    branches: [ "main", "release_**" ]    # Trigger on main and release branches
+    paths:
+      - '**/*.gradle'                     # Watch for gradle build file changes
+      - '**/*.gradle.kts'                 # Watch for kotlin build file changes
+      - 'gradle.properties'               # Watch for gradle properties changes
+      - 'settings.gradle'                 # Watch for settings file changes
+  workflow_dispatch:                      # Allow manual trigger
+
+permissions:
+  contents: write                         # Grant permission to write dependency graph
+
+jobs:
+  dependency-submission:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources           # Checkout repository code
+        uses: actions/checkout@v4
+        
+      - name: Setup Java                 # Setup Java environment
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          
+      - name: Generate and submit dependency graph    # Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@v3
+        with:
+          build-scan-publish: true                    # Enable build scan
+          gradle-build-scan-publish: true             # Enable Gradle build scan
+          sub-module-mode: true                       # Enable submodule support 
