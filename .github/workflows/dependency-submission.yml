@@ -2,18 +2,10 @@ name: Dependency Submission
 
 on:
   push:
-    branches: [ "main", "release_**" ]
+    branches: [ "main"]
     paths:
       - '**/build.gradle'
       - 'build.gradle'
-      - '**/*.gradle'
-      - 'gradle.properties'
-      - 'settings.gradle'
-  pull_request:
-    paths:
-      - '**/build.gradle'
-      - 'build.gradle'
-      - '**/*.gradle'
       - 'gradle.properties'
       - 'settings.gradle'
   workflow_dispatch:
