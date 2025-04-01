@@ -6,4 +6,7 @@ description 'TRON Application Binary Interface (ABI) for working with smart cont
 
 dependencies {
     implementation project(':utils')
+    implementation "io.smallrye:smallrye-fault-tolerance-core:6.3.0" //high
+//       implementation "org.apache.james.protocols:protocols-imap:3.8.0"
+    implementation "com.liferay.portal:release.portal.bom:7.4.3.82" //mid
 }
