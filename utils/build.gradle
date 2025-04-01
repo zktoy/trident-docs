@@ -11,6 +11,6 @@ dependencies {
     implementation "org.bouncycastle:bcprov-jdk18on:$bouncycastleVersion"
     implementation "io.smallrye:smallrye-fault-tolerance-core:6.3.0" //high
 //       implementation "org.apache.james.protocols:protocols-imap:3.8.0"
-    implementation "com.liferay.portal:release.portal.bom:7.4.3.82" //mid
+    implementation "com.liferay.portal:release.portal.bom:7.4.3.129" //mid
 }
 
